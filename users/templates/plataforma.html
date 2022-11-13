@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'plataforma/css/plataforma.css' %}">
+   
+{% endblock %}
+
+{% block 'dashboard'%}
+
+  <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+            <br>
+                <section class="alert {{message.tags}}">
+                    {{message}}
+                </section>
+            {% endfor %}
+        {% endif %}
+  </div>
+{% endblock %}

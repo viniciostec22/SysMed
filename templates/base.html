@@ -1,0 +1,91 @@
+{% load bootstrap4 %}
+{% load static %}
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'general/css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'general/css/general.css' %}">
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    {% block 'head' %}{% endblock %}
+
+    <title>{% block 'title' %}{% endblock %}</title>
+  </head>
+  <body>
+        
+    <div class="sidebar">
+        <div class="logo-details">
+            <div class="logo_name">SYSMED</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <ul class="nav-list">
+          <li>
+            <a href="#">
+              <i class='bx bxs-user-circle' ></i>
+              <span class="links_name"> {{user.username}}</span>
+            </a>
+            <span class="tooltip"> {{user.username}}</span>
+          </li>
+          <li>
+            <a href="{% url 'plataforma' %}">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Página inicial</span>
+            </a>
+            <span class="tooltip">Página inicial</span>
+          </li>
+          {% if user.cargo == "G" or user.Superuser  %}
+          <li>
+          <a href="{% url 'cadastrar_usuario' %}">
+            <i class='bx bx-user' ></i>
+            <span class="links_name">Cadastro</span>
+          </a>
+          <span class="tooltip">Cadastro</span>
+        </li>
+        {% endif %}
+        <li>
+          <a href="#">
+            <i class='bx bx-chat' ></i>
+            <span class="links_name">Serviços</span>
+          </a>
+          <span class="tooltip">Serviços</span>
+        </li>
+        <li>
+          <a href="#">
+            <i class='bx bx-folder' ></i>
+            <span class="links_name">Agenda</span>
+          </a>
+          <span class="tooltip">Agenda</span>
+        </li>
+        
+        
+        <li>
+          <a href="{% url 'logout' %}">
+            <i class='bx bxs-door-open'></i>
+           
+            <span class="links_name">Sair</span>
+          </a>
+          <span class="tooltip">Sair</span>
+        </li>
+       
+        </ul>
+      </div>
+     
+      <section class="home-section">
+       
+          {% block 'dashboard'%}
+           
+          {% endblock %}
+
+      </section>
+
+    {% block 'body' %}
+    {% endblock %}
+    <script src="{% static 'general/js/base.js' %}"></script>
+    {% bootstrap_javascript jquery="full" %}
+  </body>
+</html>
