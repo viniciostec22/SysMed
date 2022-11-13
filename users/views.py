@@ -15,7 +15,7 @@ from django.contrib import messages
 def cadastro_usuario(request):
     #user = User.objects.all()
     if request.method == 'GET':
-        users = Users.objects.filter(cargo="R")
+        users = Users.objects.all()
         return render(request, 'cadastro_usuario.html', {'users': users})
     elif request.method == 'POST':
         usuario = request.POST.get('usuario')
@@ -23,6 +23,7 @@ def cadastro_usuario(request):
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
         senha = request.POST.get('senha')
+        cargo = request.POST.get('cargo')
         
         user = Users.objects.filter(username=usuario)
         
@@ -30,7 +31,7 @@ def cadastro_usuario(request):
             messages.add_message(request, constants.ERROR, 'Usuario já existente!!') 
             return redirect('cadastrar_usuario')
         
-        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo="R")  # type: ignore
+        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo=cargo)  # type: ignore
         messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!') 
         return redirect('cadastrar_usuario')
         
@@ -67,8 +68,8 @@ def logout(request):
 
 @has_permission_decorator('cadastrar_vendedor')
 def exluir_usuario(request, id):
-    recepcionista = get_object_or_404(Users, id=id)
-    recepcionista.delete()
-    messages.add_message(request, constants.SUCCESS, f'Usuario {recepcionista.first_name.upper()} exluido com sucesso')
+    users = get_object_or_404(Users, id=id)
+    users.delete()
+    messages.add_message(request, constants.SUCCESS, f'Usuario {users.first_name.upper()} exluido com sucesso')
     return redirect(reverse('cadastrar_usuario'))
     
