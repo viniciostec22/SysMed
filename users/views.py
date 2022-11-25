@@ -24,7 +24,7 @@ def cadastro_usuario(request):
         sobrenome = request.POST.get('sobrenome')
         senha = request.POST.get('senha')
         cargo = request.POST.get('cargo')
-        
+       
         user = Users.objects.filter(username=usuario)
         
         if user.exists():

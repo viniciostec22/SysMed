@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
    
 {% endblock %}
-
+<title>{% block 'title' %}SYSMED | Cadastro{% endblock %}</title>
 {% block 'dashboard'%}
     <div class="container container-cadastro">
         {% if messages %}
@@ -41,11 +41,11 @@
             <div class="row">
                 <div class="col-md">
                     <label class="mr-sm-2">Cargo:</label>
-                    <select class="browser-default custom-select">
-                        <option selected>Open this select menu</option>
-                        {% for cargo in cargos %}
-                        <option value="1">{{User.cargo}}</option>
-                        {% endfor %}
+                    <select class="browser-default custom-select" name="cargo">
+                        <option selected>Selecione cargo</option>
+                            <option value="G">Gerente</option>
+                            <option value="R">Recepcionista</option>   
+                            <option value="M">Medico</option>                        
                       </select>
                 </div>
                 <div class="col-md">

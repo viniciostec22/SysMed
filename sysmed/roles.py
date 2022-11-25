@@ -5,7 +5,8 @@ class Gerente(AbstractUserRole):
     available_permissions = {
         'cadastrar_usuarios':True,
         'cadastrar_medico':True,
-        'cadastrar_recpcionista':True,
+        'cadastrar_recepcionista':True,
+        'cadastrar_gerente':True,
     }
     
 class Recepcionista(AbstractUserRole):

@@ -14,7 +14,7 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     {% block 'head' %}{% endblock %}
 
-    <title>{% block 'title' %}{% endblock %}</title>
+    <title>{% block 'title' %} SYSMED | Home {% endblock %}</title>
   </head>
   <body>
         
@@ -27,7 +27,7 @@
           <li>
             <a href="#">
               <i class='bx bxs-user-circle' ></i>
-              <span class="links_name"> {{user.username}}</span>
+              <span class="links_name"> {{user.first_name}} </span>
             </a>
             <span class="tooltip"> {{user.username}}</span>
           </li>
@@ -38,7 +38,7 @@
             </a>
             <span class="tooltip">Página inicial</span>
           </li>
-          {% if user.cargo == "G" or user.Superuser  %}
+          {% if user.cargo == "G" %}
           <li>
           <a href="{% url 'cadastrar_usuario' %}">
             <i class='bx bx-user' ></i>
@@ -47,6 +47,13 @@
           <span class="tooltip">Cadastro</span>
         </li>
         {% endif %}
+        <li>
+          <a href="#">
+            <i class='bx bx-plus-medical'></i>
+            <span class="links_name">Marcar consulta</span>
+          </a>
+          <span class="tooltip">Marcar consulta</span>
+        </li>
         <li>
           <a href="#">
             <i class='bx bx-chat' ></i>

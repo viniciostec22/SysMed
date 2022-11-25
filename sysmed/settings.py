@@ -135,9 +135,9 @@ ROLEPERMISSIONS_MODULE = 'sysmed.roles'
 
 #Messages
 MESSAGE_TAGS = {
-    constants.DEBUG: 'alert-primary',
-    constants.ERROR: 'alert-danger',
-    constants.SUCCESS: 'alert-success',
-    constants.INFO: 'alert-info',
-    constants.WARNING: 'alert-warning'    
+    constants.DEBUG: 'alert-primary alert-dismissible fade show',
+    constants.ERROR: 'alert-danger alert-dismissible fade show',
+    constants.SUCCESS: 'alert-success alert-dismissible fade show',
+    constants.INFO: 'alert-info alert-dismissible fade show',
+    constants.WARNING: 'alert-warning alert-dismissible fade show'    
 }
