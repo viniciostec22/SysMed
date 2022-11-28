@@ -38,7 +38,7 @@
             </a>
             <span class="tooltip">Página inicial</span>
           </li>
-          {% if user.cargo == "G" %}
+          {% if user.cargo.nome == "Gerente" %}
           <li>
           <a href="{% url 'cadastrar_usuario' %}">
             <i class='bx bx-user' ></i>
@@ -47,6 +47,13 @@
           <span class="tooltip">Cadastro</span>
         </li>
         {% endif %}
+        <li>
+          <a href="{% url 'cadastrar_paciente' %}">
+            <i class='bx bxs-user-plus'></i>
+            <span class="links_name">Cadastrar Paciente</span>
+          </a>
+          <span class="tooltip">Cadastrar Paciente</span>
+        </li>
         <li>
           <a href="#">
             <i class='bx bx-plus-medical'></i>

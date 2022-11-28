@@ -9,14 +9,14 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.contrib import messages
-
+from .models import Cargo
 
 @has_permission_decorator('cadastrar_recepcionista')
 def cadastro_usuario(request):
-    #user = User.objects.all()
+    cargo = Cargo.objects.all()
     if request.method == 'GET':
         users = Users.objects.all()
-        return render(request, 'cadastro_usuario.html', {'users': users})
+        return render(request, 'cadastro_usuario.html', {'users': users, 'cargo':cargo})
     elif request.method == 'POST':
         usuario = request.POST.get('usuario')
         email = request.POST.get('email')
@@ -31,7 +31,7 @@ def cadastro_usuario(request):
             messages.add_message(request, constants.ERROR, 'Usuario já existente!!') 
             return redirect('cadastrar_usuario')
         
-        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo=cargo)  # type: ignore
+        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo_id=cargo)  # type: ignore
         messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!') 
         return redirect('cadastrar_usuario')
         
