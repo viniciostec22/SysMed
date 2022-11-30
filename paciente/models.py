@@ -16,7 +16,7 @@ class Paciente(models.Model):
     email = models.EmailField(default='')
     telefone = models.CharField(max_length=12)
     endereco = models.CharField(max_length=200, default='')
-    convenio = models.ForeignKey(Convenio,null=True, on_delete=models.SET_NULL, default='')
+    
     
     def __str__(self) -> str:
         return self.nome

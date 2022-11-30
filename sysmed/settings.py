@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'paciente',
+    'consulta',
+    'medico',
     'bootstrap4',
     'rolepermissions',
 ]

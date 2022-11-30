@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+   
+{% endblock %}
+<title>{% block 'title' %}SYSMED | Marca consulta{% endblock %}</title>
+{% block 'dashboard'%}
+<div class="container container-cadastro">
+    {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <form class="" action="{% url 'cadastrar_consulta' %}" method="POST">{% csrf_token %}
+        <div class="row">
+            <div class="col-md">
+                <label class="mr-sm-2">Paciente</label>
+                <input type="text" placeholder="Digite nome " name="nome" value="" class="form-control">
+            </div>
+            <div class="col-md">
+                <label class="mr-sm-2">Data da Consulta</label>
+                <input class="form-control input-tarefa" type="date" placeholder="" name="data_Consulta" >
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md">
+                <label class="mr-sm-2">Convenio</label>
+                <input type="text" placeholder="" name="nome" value="" class="form-control">
+                
+            </div>
+            <div class="col-md">
+                <label  class="mr-sm-2">Tipo da consulta</label>
+                <input type="text" placeholder="" name="tipo_consulta" class="form-control" alt="">
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md">
+            <label  class="mr-sm-2">Medico responsavel</label>
+            <input type="text" placeholder="" name="medico" class="form-control">
+           
+           </div>
+            <div class="col-md">
+                <label for="pwd">Valor da Consulta (R$)</label>
+                <input type="text" placeholder="" name="endereco" class="form-control" alt="endereço">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+             <label  class="mr-sm-2">Descrição</label>
+            <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+             
+         </div>
+
+            <div class="botao">
+                <input type="submit" class="btn btn-success">
+            </div>
+    </form>
+</div>
+{% endblock 'dashboard'%}
