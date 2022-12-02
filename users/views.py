@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from rolepermissions.decorators import has_permission_decorator
-from .models import Users
+from .models import Users, Cargo
 from django.urls import reverse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -72,4 +72,19 @@ def exluir_usuario(request, id):
     users.delete()
     messages.add_message(request, constants.SUCCESS, f'Usuario {users.first_name.upper()} exluido com sucesso')
     return redirect(reverse('cadastrar_usuario'))
-    
+
+def add_cargo(request):
+    if request.method == "GET":
+        return render(request, 'cadastro_usuario.html')
+    elif request.method == "POST":
+        nome = request.POST.get('nome')
+        
+        if Cargo.objects.filter(nome = nome).exists():
+             messages.add_message(request, constants.ERROR, 'Cargo já cadastrado!!')
+             return redirect('cadastrar_usuario')
+        cargo = Cargo(
+            nome = nome
+        )
+        cargo.save()
+        messages.add_message(request, constants.SUCCESS, 'Cargo criado Com sucesso!!')
+        return redirect('cadastrar_usuario')

@@ -114,16 +114,19 @@
                     {% for pacientes in paciente %}
                     
                         <tr>
-                            <div class="col-md-6">
+                            
                             <form action="{% url 'cadastrar_consulta'%}" method="POST">{%csrf_token%}
-                            <th>
-                                <input type="text" name="id" value="{{pacientes.id}}" class="form-control"readonly >
-                            </th>
-                            <td>
-
-                                <input type="text" name="paciente" value="{{pacientes.nome}} " class="form-control" readonly> <button class="btn btn-success" type="submit">Add</button>
-                                </form></td>
-                        
+                                <div class="col-md-6">
+                                <td>
+                                    <input type="text" name="id" value="{{pacientes.id}}" class="form-control"readonly >
+                                </td>
+                                </div>
+                                <td>
+                                    <input type="text" name="paciente" value="{{pacientes.nome}} " class="form-control" readonly> <button class="btn btn-success" type="submit">Add</button>
+                                    
+                                </td>
+                            </form>
+                        </tr>
                             
                     {% endfor %}
                    
