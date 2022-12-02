@@ -26,10 +26,14 @@
         <div class="row">
             <div class="col-md">
                 <label class="mr-sm-2">Paciente</label>
-                <input type="text" placeholder="Digite nome " name="nome" value="" class="form-control">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-                    +
-                  </button>
+                
+                  
+                  <input type="text" list="ice-cream-flavors" id="ice-cream-choice" name="coisa" class="form-control">
+                  <datalist nam id="ice-cream-flavors">
+                    {% for pacientes in paciente %}
+                    <option value="{{pacientes.id }} {{pacientes.nome }}" >
+                    {% endfor %}
+                  </datalist>
             </div>
             <div class="col-md">
                 <label class="mr-sm-2">Data da Consulta</label>
@@ -88,9 +92,10 @@
         <div class="modal-body">
             <form action="{% url 'cadastrar_consulta' %}" class="form-inline">
                 <input class="form-control mr-sm-2" autocomplete="off" type="search" name="termo" placeholder="Pesquisar"
-                  aria-label="Pesquisar">
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Pesquisar</button>
-              </form>
+                  aria-label="Pesquisar"><!--
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="search">Pesquisar</button>
+              -->
+            </form>
               <br>
             <table class="table table-striped table-dark">
                 <thead>
