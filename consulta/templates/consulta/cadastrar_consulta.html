@@ -26,15 +26,20 @@
         <div class="row">
             <div class="col-md">
                 <label class="mr-sm-2">Paciente</label>
-                
-                  
-                  <input type="text" list="ice-cream-flavors" id="ice-cream-choice" name="coisa" class="form-control">
-                  <datalist nam id="ice-cream-flavors">
+                <input type="text" value="{{pacienteunico}}">                  
+                  {% comment %} <input type="text" list="pacientes" id="paciente" name="paciente" class="form-control" autocomplete="off">
+                  <datalist id="pacientes">
                     {% for pacientes in paciente %}
-                    <option value="{{pacientes.id }} {{pacientes.nome }}" >
+                        <option value="{{pacientes.id}} {{pacientes.nome}}" ></option>
                     {% endfor %}
-                  </datalist>
+                  </datalist> {% endcomment %}
+                  {% comment %} <input type="text"  class="form-control">
+                  <button type="search" name="id" value="{{paciente.id}}">Pesquisar</button> {% endcomment %}
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                    +
+                  </button>
             </div>
+            
             <div class="col-md">
                 <label class="mr-sm-2">Data da Consulta</label>
                 <input class="form-control input-tarefa" type="date" placeholder="" name="data_Consulta" >
@@ -107,12 +112,19 @@
                 </thead>
                 <tbody>
                     {% for pacientes in paciente %}
+                    
                         <tr>
-                            <th>{{pacientes.id}}</th>
-                            <td>{{pacientes.nome}}</td>
-                           
-                            <td><a href="" class="btn btn-danger">EXCLUIR</a></td>
-                        </tr>
+                            <div class="col-md-6">
+                            <form action="{% url 'cadastrar_consulta'%}" method="POST">{%csrf_token%}
+                            <th>
+                                <input type="text" name="id" value="{{pacientes.id}}" class="form-control" >
+                            </th>
+                            <td>
+
+                                <input type="text" name="paciente" value="{{pacientes.nome}} " class="form-control"> <button class="btn btn-success" type="submit">Add</button>
+                                </form></td>
+                        
+                            
                     {% endfor %}
                    
                 </tbody>

@@ -4,11 +4,14 @@ from django.db.models import Q
 
 # Create your views here.
 def cadastrar_consulta(request):
+        pacienteunico=''
         if request.method == 'POST':
-                nome = request.POST.get('coisa')
-                nome = str(nome).split(" ")[0]
-                print(nome)
+                pacienteunico = request.POST.get('paciente')
+                id= request.POST.get('id')
+                #paciente = str(paciente).split(" ")[0]
+                print(id)
+                
         paciente = Paciente.objects.all()
-        return render(request, 'consulta/cadastrar_consulta.html',{'paciente':paciente})
+        return render(request, 'consulta/cadastrar_consulta.html',{'paciente':paciente, 'pacienteunico':pacienteunico})
     
         
