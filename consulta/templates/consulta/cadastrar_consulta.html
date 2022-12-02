@@ -113,8 +113,7 @@
                 <tbody>
                     {% for pacientes in paciente %}
                     
-                        <tr>
-                            
+                        <tr>                          
                             <form action="{% url 'cadastrar_consulta'%}" method="POST">{%csrf_token%}
                                 <div class="col-md-6">
                                 <td>
