@@ -4,6 +4,7 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+    <script src="{% static 'cadastro/js/cpf.js' %}"></script>
    
 {% endblock %}
 <title>{% block 'title' %}SYSMED | Cadastro{% endblock %}</title>
@@ -40,6 +41,16 @@
             </div>
             <div class="row">
                 <div class="col-md">
+                    <label class="mr-sm-2">Data de nascimento</label>
+                    <input type="date" placeholder="" name="data_nascimento" class="form-control">
+                </div>
+                <div class="col-md">
+                    <label for="Sobrenome" class="mr-sm-2">CPF</label>
+                    <input oninput="mascara(this)" type="text" class="form-control" name="cpf" placeholder="CPF">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
                     <label class="mr-sm-2">Cargo:</label>
                     <select class="browser-default custom-select" name="cargo">
                         <option selected>Selecione cargo</option>
@@ -48,19 +59,26 @@
                         {% endfor %}                      
                       </select>
                 </div>
+                
                 <div class="col-md">
                     <label for="pwd">Senha:</label>
                     <input type="password" placeholder="Digite senha" name="senha" class="form-control">
                 </div>
             </div>
+           
     
                 <div class="botao">
                     <input type="submit" class="btn btn-success" style="margin-right:50px ;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo" style="margin-right:50px ;">
                         Add Cargo
-                      </button>
+                    </button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAddMedico">
+                        Cadastrar Medico
+                    </button>
+
 
                 </div>
+               
            
 
         </form>
@@ -83,7 +101,7 @@
                         <th>{{user.first_name}}</th>
                         <td>{{user.last_name}}</td>
                         <td>{{user.email}}</td>
-                        <td>{{user.get_cargo_display}}</td>
+                        <td>{{user.cargo}}</td>
                         <td>{% if not user.last_login %}
                                 Primeiro acesso
                             {% else %}
@@ -92,19 +110,21 @@
                         
                         
                         </td>
-                        <td><a href="{% url 'excluir_usuario' user.id%}" class="btn btn-danger">EXCLUIR</a></td>
+                        <td>
+                            <a href="{% url 'excluir_usuario' user.id%}" class="btn btn-danger">EXCLUIR</a>
+
+                        </td>
                     </tr>
                 {% endfor %}
                
             </tbody>
             </table>
-    </div>
-   
-
-
-    
+    </div>    
 {% endblock %}
+
  {% block modal %}
+ {% include 'modulos/_add_modal_medico.html'%}
+
         <!-- Modal -->
 <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

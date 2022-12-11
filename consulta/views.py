@@ -1,17 +1,29 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from paciente.models import Paciente
+from medico.models import Medico
 from django.db.models import Q
+from .models import MarcarConsulta
+from .forms import MarcaConsultaModelForm
+from django.contrib.messages import constants
+from django.contrib import messages
 
 # Create your views here.
 def cadastrar_consulta(request):
-        pacienteunico=''
-        if request.method == 'POST':
-                pacienteunico = request.POST.get('paciente')
-                id= request.POST.get('id')
-                #paciente = str(paciente).split(" ")[0]
-                print(id)
+        if request.method == 'GET':
+                form = MarcaConsultaModelForm()  
+                return render(request, 'consulta/cadastrar_consulta.html',
+                              {'form':form})
                 
-        paciente = Paciente.objects.all()
-        return render(request, 'consulta/cadastrar_consulta.html',{'paciente':paciente, 'pacienteunico':pacienteunico})
-    
+        elif request.method == 'POST':
+                form = MarcaConsultaModelForm(request.POST) 
+               
+                if form.is_valid():
+                        form.save() 
+                        messages.add_message(request, constants.SUCCESS, 'Consulta Marcada com Sucesso!!')
+                        return redirect('cadastrar_consulta')
+                else:
+                        return render(request, 'consulta/cadastrar_consulta.html',{'form':form})
+                        
+      
+      
         

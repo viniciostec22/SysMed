@@ -1,0 +1,46 @@
+
+
+<div class="modal fade" id="modalDelete{{produto.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel{{produto.id}}">Deseja realmente excluir <span style="color:red;">{{produto.nome}}</span>?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <form action="{% url 'del_produto' produto.id %}" method="POST">
+            {% csrf_token %}
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <button type="submit" class="btn btn-danger">Excluir</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modalExemplo{{categoria.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel{{categoria.id}}">Deseja realmente excluir <span style="color:red;">{{categoria.nome}}</span>?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        {% comment %} <form action="{% url 'del_categoria' categoria.id %}" method="POST"> {% endcomment %}
+          <form action="{% url 'categorias' %}" method="POST">
+          {% csrf_token %}
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-danger">Excluir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endif %}

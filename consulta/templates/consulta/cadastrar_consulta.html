@@ -22,121 +22,18 @@
             </section>
         {% endfor %}
     {% endif %}
-    <form class="" action="{% url 'cadastrar_consulta' %}" method="POST">{% csrf_token %}
-        <div class="row">
-            <div class="col-md">
-                <label class="mr-sm-2">Paciente</label>
-                <input type="text" value="{{pacienteunico}}" class="form-control" readonly>                  
-                  {% comment %} <input type="text" list="pacientes" id="paciente" name="paciente" class="form-control" autocomplete="off">
-                  <datalist id="pacientes">
-                    {% for pacientes in paciente %}
-                        <option value="{{pacientes.id}} {{pacientes.nome}}" ></option>
-                    {% endfor %}
-                  </datalist> {% endcomment %}
-                  {% comment %} <input type="text"  class="form-control">
-                  <button type="search" name="id" value="{{paciente.id}}">Pesquisar</button> {% endcomment %}
-                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-                    +
-                  </button>
-            </div>
-            
-            <div class="col-md">
-                <label class="mr-sm-2">Data da Consulta</label>
-                <input class="form-control input-tarefa" type="date" placeholder="" name="data_Consulta" >
-            </div>
-        </div>
-        <div class="row"> 
-            <div class="col-md">
-                <label class="mr-sm-2">Convenio</label>
-                <input type="text" placeholder="" name="nome" value="" class="form-control">
-                
-            </div>
-            <div class="col-md">
-                <label  class="mr-sm-2">Tipo da consulta</label>
-                <input type="text" placeholder="" name="tipo_consulta" class="form-control" alt="">
-            </div>
-        </div>
-        <div class="row">
-           <div class="col-md">
-            <label  class="mr-sm-2">Medico responsavel</label>
-            <input type="text" placeholder="" name="medico" class="form-control">
-           
-           </div>
-            <div class="col-md">
-                <label for="pwd">Valor da Consulta (R$)</label>
-                <input type="text" placeholder="" name="endereco" class="form-control" alt="endereço">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md">
-             <label  class="mr-sm-2">Descrição</label>
-            <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea>
-            </div>
-             
-         </div>
-
-            <div class="botao">
-                <input type="submit" class="btn btn-success">
-            </div>
-    </form>
+    <div class="container">
+        <form class="" action="{% url 'cadastrar_consulta' %}" method="POST">{% csrf_token %}
+            {% bootstrap_form form %}
+            <input type="submit" class="btn btn-success" value="Salvar">
+        </form>
+    </div>
 </div>
 
 {% endblock 'dashboard'%}
   
 {% block modal %}
 <!-- Modal -->
-<div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form action="{% url 'cadastrar_consulta' %}" class="form-inline">
-                <input class="form-control mr-sm-2" autocomplete="off" type="search" name="termo" placeholder="Pesquisar"
-                  aria-label="Pesquisar"><!--
-                <button class="btn btn-outline-primary my-2 my-sm-0" type="search">Pesquisar</button>
-              -->
-            </form>
-              <br>
-            <table class="table table-striped table-dark">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">nome</th>
-                       
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for pacientes in paciente %}
-                    
-                        <tr>                          
-                            <form action="{% url 'cadastrar_consulta'%}" method="POST">{%csrf_token%}
-                                <div class="col-md-6">
-                                <td>
-                                    <input type="text" name="id" value="{{pacientes.id}}" class="form-control"readonly >
-                                </td>
-                                </div>
-                                <td>
-                                    <input type="text" name="paciente" value="{{pacientes.nome}} " class="form-control" readonly> <button class="btn btn-success" type="submit">Add</button>
-                                    
-                                </td>
-                            </form>
-                        </tr>
-                            
-                    {% endfor %}
-                   
-                </tbody>
-                </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-          <button type="button" class="btn btn-primary">Salvar mudanças</button>
-        </div>
-      </div>
-    </div>
-  </div>
+{%include 'modulos/_modal_paciente.html'%}
+{%include 'modulos/_modal_medico.html'%}
 {% endblock modal %}

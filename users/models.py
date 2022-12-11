@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -12,3 +13,5 @@ class Users(AbstractUser):
     
     #cargo = models.CharField(max_length=1, choices=choices_cargo)
     cargo = models.ForeignKey(Cargo, on_delete=models.CASCADE, null=True)
+    cpf = models.CharField(max_length=12, blank=True)
+    data_nascimento = models.DateField(blank=True, null=True)

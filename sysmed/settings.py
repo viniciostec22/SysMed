@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'paciente',
     'consulta',
     'medico',
+    'agenda',
     'bootstrap4',
     'rolepermissions',
 ]

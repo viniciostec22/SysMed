@@ -22,6 +22,8 @@ def cadastro_usuario(request):
         email = request.POST.get('email')
         nome = request.POST.get('nome')
         sobrenome = request.POST.get('sobrenome')
+        data_nascimento = request.POST.get('data_nascimento')
+        cpf = request.POST.get('cpf')
         senha = request.POST.get('senha')
         cargo = request.POST.get('cargo')
        
@@ -31,7 +33,11 @@ def cadastro_usuario(request):
             messages.add_message(request, constants.ERROR, 'Usuario já existente!!') 
             return redirect('cadastrar_usuario')
         
-        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo_id=cargo)  # type: ignore
+        if Users.objects.filter(cpf=cpf):
+            messages.add_message(request, constants.ERROR, 'CPF já cadastrado') 
+            return redirect('cadastrar_usuario')
+        
+        user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo_id=cargo, data_nascimento=data_nascimento, cpf=cpf)  # type: ignore
         messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!') 
         return redirect('cadastrar_usuario')
         
