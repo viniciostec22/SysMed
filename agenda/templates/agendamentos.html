@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'consulta/css/consulta.css' %}">
+    <script src="{% static 'consulta/css/conulta.js' %}"></script> {% endcomment %}
+   
+{% endblock %}
+<title>{% block 'title' %}SYSMED | Agendamentos{% endblock %}</title>
+{% block 'dashboard'%}
+<div class="container" >
+    {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <table class="table table-striped table-dark" >
+        <thead >
+          <tr>
+            <th scope="col">Medico</th>
+            <th scope="col">Horario</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {% for horarios in horario %}
+          <tr>
+            <th scope="row">{{horarios.medico}}</th>
+            <td>{{horarios.get_horario_display}}</td>
+                  
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+
+{% endblock 'dashboard'%}
