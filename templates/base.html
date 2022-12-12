@@ -62,6 +62,13 @@
           <span class="tooltip">Marcar consulta</span>
         </li>
         <li>
+          <a href="{% url 'listar_consultas' %}">
+            <i class='bx bx-plus-medical'></i>
+            <span class="links_name">consulta</span>
+          </a>
+          <span class="tooltip">consulta</span>
+        </li>
+        <li>
           <a href="{% url 'cadastra_medico' %}">
             <i class='bx bxs-user-rectangle'></i>
             <span class="links_name">Cadastrar medico</span>
@@ -101,6 +108,8 @@
           {% block 'dashboard'%}
            
           {% endblock %}
+          {%block search%}
+          {%endblock search%}
 
       </section>
       {% block modal %}{% endblock modal %}

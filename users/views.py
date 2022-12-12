@@ -79,6 +79,11 @@ def exluir_usuario(request, id):
     messages.add_message(request, constants.SUCCESS, f'Usuario {users.first_name.upper()} exluido com sucesso')
     return redirect(reverse('cadastrar_usuario'))
 
+def editar_usuario(request, id):
+    user = Users.objects.filter(id=id)
+    if request.method == 'GET':
+          return render(request, 'editar_usuario.html', {'user': user})
+
 def add_cargo(request):
     if request.method == "GET":
         return render(request, 'cadastro_usuario.html')

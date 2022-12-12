@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+    <link rel="stylesheet" href="{% static 'consulta/css/listar_consultas.css' %}">
+    <script src="{% static 'consulta/css/conulta.js' %}"></script>
+   
+{% endblock %}
+
+<title>{% block 'title' %}SYSMED | Marca consulta{% endblock %}</title>
+
+{% block 'dashboard'%}
+
+    <div class="container">
+        <br>
+        {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <br>
+        <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}" method="POST">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>
+          <br>
+        <table class="table table-striped table-dark">
+            <thead>
+               
+              <tr>
+                <th scope="col">Paciente</th>
+                <th scope="col">Medico</th>
+                <th scope="col">Data</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Ações</th>
+              </tr>
+             
+            </thead>
+            <tbody>
+              <tr>
+                {% for consulta in consultas %}
+                <th scope="row">{{consulta.paciente}}</th>
+                <td>{{consulta.medico}}</td>
+                <td>{{consulta.data}}</td>
+                <td>{{consulta.get_horario_display}}</td>
+                <td> 
+                    <a href="{% url 'editar_consulta' consulta.id %}" class="btn btn-success">Regendar </a>
+                    <a href="{% url 'excluir_consulta' consulta.id %} " class="btn btn-danger">Excluir</a>
+                
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!-- Paginacao -->
+     {%include 'modulos/_paginacao_nav.html'%}
+    </div>
+     
+{% endblock 'dashboard'%}

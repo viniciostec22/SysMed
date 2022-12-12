@@ -23,10 +23,24 @@
         {% endfor %}
     {% endif %}
     <div class="container">
-        <form class="" action="{% url 'cadastrar_consulta' %}" method="POST">{% csrf_token %}
-            {% bootstrap_form form %}
+       
+       
+   
+    <form method="POST" class="form" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %}    
+        {% bootstrap_form forms %}
+        {% if produto %}
             <input type="submit" class="btn btn-success" value="Salvar">
-        </form>
+            <a href="{% url 'produtos' %}"<button type="button" class="btn btn-secondary">Voltar</button></a>
+            <a href="{{produto.id}}" data-toggle="modal" data-target="#modalExemplo{{produto.id}}"><button type="button" class="btn btn-danger">Excluir</button></a>
+            <!-- Modal -->
+           
+        {% else %}
+            <input type="submit" class="btn btn-success" value="Salvar">
+            <input type="reset" class="btn btn-primary" value="Limpar">
+            <a href="{% url 'listar_consultas' %}"<button type="button" class="btn btn-secondary">Voltar</button></a>
+        {% endif %}
+    </form>
     </div>
 </div>
 
