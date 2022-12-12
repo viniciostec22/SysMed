@@ -11,7 +11,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-@login_required
+
+
 def cadastrar_consulta(request):
         if request.method == 'GET':
                 forms = MarcaConsultaModelForm()  
@@ -44,7 +45,7 @@ def listar_consultas(request):
 
       if request.GET.get('termo'):
               termo = request.GET.get('termo')
-
+              print('1',termo)
               consultas = MarcarConsulta.objects.filter(Q(paciente__nome__icontains=termo) | 
                                                         Q(medico__nome__icontains=termo)|
                                                         Q(data__icontains=termo))

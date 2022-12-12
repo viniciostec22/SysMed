@@ -37,7 +37,8 @@
             </a>
             <span class="tooltip">Página inicial</span>
           </li>
-          {% if user.cargo.nome == "Gerente" %}
+          
+          {% if user.cargo.nome == "Gerente" or user.is_superuser %}
           <li>
           <a href="{% url 'cadastrar_usuario' %}">
             <i class='bx bx-user' ></i>
@@ -63,17 +64,17 @@
         </li>
         <li>
           <a href="{% url 'listar_consultas' %}">
-            <i class='bx bx-plus-medical'></i>
-            <span class="links_name">consulta</span>
+            <i class='bx bx-list-ol'></i>
+            <span class="links_name">Consultas Marcadas</span>
           </a>
-          <span class="tooltip">consulta</span>
+          <span class="tooltip">Consultas Marcadas</span>
         </li>
         <li>
           <a href="{% url 'cadastra_medico' %}">
             <i class='bx bxs-user-rectangle'></i>
-            <span class="links_name">Cadastrar medico</span>
+            <span class="links_name">Cadastrar Médico</span>
           </a>
-          <span class="tooltip">Cadastrar medico</span>
+          <span class="tooltip">Cadastrar Médico</span>
         </li>
         <li>
           <a href="#">

@@ -27,7 +27,7 @@
         {% endfor %}
     {% endif %}
     <br>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}" method="POST">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}" method="POST">{% csrf_token %}
             <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
           </form>

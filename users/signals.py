@@ -7,9 +7,9 @@ from rolepermissions.roles import assign_role
 @receiver(post_save, sender=Users)
 def define_permissoes(sender, instance, created, **kwargs):
     if created:
-        if instance.cargo == "recepcionista":
-            assign_role(instance, 'recepcionista')
-        elif instance.cargo == "rerente":
+        if instance.cargo__nome == "Recepcionista":
+            assign_role(instance, 'Recepcionista')
+        elif instance.cargo__nome == "Gerente":
             assign_role(instance, 'gerenete')
-        elif instance.cargo == "medico":
+        elif instance.cargo__nome == "medico":
             assign_role(instance, 'medico')
