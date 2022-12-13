@@ -27,8 +27,8 @@
         {% endfor %}
     {% endif %}
     <br>
-        <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}" method="POST">{% csrf_token %}
-            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}">{% csrf_token %}
+            <input class="form-control mr-sm-2" type="" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
           </form>
           <br>
@@ -52,7 +52,7 @@
                 <td>{{consulta.data}}</td>
                 <td>{{consulta.get_horario_display}}</td>
                 <td> 
-                    <a href="{% url 'editar_consulta' consulta.id %}" class="btn btn-success">Regendar </a>
+                    <a href="{% url 'editar_consulta' consulta.id %}" class="btn btn-success">Reagendar </a>
                     <a href="{% url 'excluir_consulta' consulta.id %} " class="btn btn-danger">Excluir</a>
                 
                 </td>
