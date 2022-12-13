@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect,get_object_or_404
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 import consulta
 from paciente.models import Paciente
 from medico.models import Medico
@@ -23,6 +23,7 @@ def cadastrar_consulta(request):
                 forms = MarcaConsultaModelForm(request.POST) 
                
                 if forms.is_valid():
+                        #if Medico.objects.filter(medico.horario)
                         forms.save() 
                         messages.add_message(request, constants.SUCCESS, 'Consulta Marcada com Sucesso!!')
                         return redirect('cadastrar_consulta')
@@ -32,7 +33,7 @@ def cadastrar_consulta(request):
 def editar_consulta(request, id):
         consuta = MarcarConsulta.objects.get(id=id)
         if request.method == 'POST':
-                forms = MarcaConsultaModelForm(request.POST, instance=consuta)
+                forms = MarcaConsultaModelForm(request.POST or None, instance=consuta)
                 if forms.is_valid():
                         forms.save()
                         messages.add_message(request, constants.SUCCESS, 'Consulta editada Sucesso!!')

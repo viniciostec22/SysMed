@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+   
+{% endblock %}
+<title>{% block 'title' %}SYSMED | Cadastro Pacientes{% endblock %}</title>
+{% block 'dashboard'%}
+<div class="container container-cadastro">
+    {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <form class="" action="{% url 'update_paciente' paciente.id %}" method="POST">{% csrf_token %}
+        <div class="row">
+            <div class="col-md">
+                <label class="mr-sm-2">Nome</label>
+                <input type="text" placeholder="Digite nome " name="nome" value="{{paciente.nome}}" class="form-control">
+            </div>
+            <div class="col-md">
+                <label for="email" class="mr-sm-2">E-mail</label>
+                <input type="email" placeholder="Digite o Email" name="email" class="form-control" value="{{paciente.email}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <label class="mr-sm-2">Data de Nascimento</label>
+                <input class="form-control input-tarefa" type="" placeholder="Nascimento" name="data_nascimento" value="{{paciente.data_nascimento}}" >
+                
+            </div>
+            <div class="col-md">
+                <label  class="mr-sm-2">CPF</label>
+                <input type="text" placeholder="CPF" name="cpf" class="form-control" alt="Digite seu cpf" value="{{paciente.cpf}}">
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md">
+            <label  class="mr-sm-2">Telefone</label>
+            <input type="text" placeholder="Digite Telefone" name="telefone" class="form-control" value="{{paciente.telefone}}">
+           
+           </div>
+            <div class="col-md">
+                <label for="pwd">Endereço</label>
+                <input type="text" placeholder="Digite endereco" name="endereco" class="form-control" alt="endereço" value="{{paciente.endereco}}">
+            </div>
+        </div>
+
+            <div class="botao">
+                <input type="submit" class="btn btn-success">
+            </div>
+    </form>
+</div>
+{% endblock 'dashboard'%}
+

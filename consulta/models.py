@@ -19,6 +19,7 @@ class MarcarConsulta(models.Model):
         ("4", "10:00 ás 11:00"),
         ("5", "11:00 ás 12:00"),
     )
-    horario = models.CharField(max_length=10, choices=HORARIOS)
-    
-    
+    horario = models.CharField(max_length=10, choices=HORARIOS) # type: ignore  
+   
+    def __str__(self) -> str:
+        return self.paciente.nome
