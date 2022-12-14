@@ -11,3 +11,11 @@
 .bg-hr{
     background-color: gray;
 }
+.display-4{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 36px;
+}
+.filtrar{
+    margin-bottom: 10px;
+}

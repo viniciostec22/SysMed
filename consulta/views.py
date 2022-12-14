@@ -46,7 +46,6 @@ def listar_consultas(request):
 
       if request.GET.get('termo'):
               termo = request.GET.get('termo')
-              print('1',termo)
               consultas = MarcarConsulta.objects.filter(Q(paciente__nome__icontains=termo) | 
                                                         Q(medico__nome__icontains=termo)|
                                                         Q(data__icontains=termo))

@@ -8,7 +8,10 @@
 {% endblock %}
 <title>{% block 'title' %}SYSMED | Cadastro Pacientes{% endblock %}</title>
 {% block 'dashboard'%}
-<div class="container container-cadastro">
+<div class="container ">
+    <br>
+    <h1 class="display-4">Editar | <b class="">{{paciente.nome}}</b></h1>
+    <hr class="bg-hr">
     {% if messages %}
         {% for message in messages %}
         <br>
@@ -20,6 +23,7 @@
             </section>
         {% endfor %}
     {% endif %}
+   
     <form class="" action="{% url 'update_paciente' paciente.id %}" method="POST">{% csrf_token %}
         <div class="row">
             <div class="col-md">
@@ -34,7 +38,7 @@
         <div class="row">
             <div class="col-md">
                 <label class="mr-sm-2">Data de Nascimento</label>
-                <input class="form-control input-tarefa" type="" placeholder="Nascimento" name="data_nascimento" value="{{paciente.data_nascimento}}" >
+                <input class="form-control input-tarefa" type="date" placeholder="Nascimento" name="data_nascimento" value="{{paciente.data_nascimento}}" >
                 
             </div>
             <div class="col-md">
@@ -56,6 +60,7 @@
 
             <div class="botao">
                 <input type="submit" class="btn btn-success">
+                <a href="{% url 'cadastrar_paciente' %}" class="btn btn-secondary">Voltar</a>
             </div>
     </form>
 </div>

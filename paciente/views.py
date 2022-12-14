@@ -1,3 +1,5 @@
+import email
+from symbol import term
 from tokenize import Ignore
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
@@ -7,10 +9,13 @@ from .models import Paciente, Convenio
 from django.contrib.messages import constants
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+from django.db.models import Q
 
 @login_required #type:ignore
 def cadastrar_paciente(request):
     pacientes = Paciente.objects.all()
+   
     if request.method == 'GET':
         return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
     
@@ -52,11 +57,11 @@ def delete_paciente(request, id):
     paciente.delete()
     messages.add_message(request, constants.SUCCESS, 'Paciente excluido Com sucesso!!')
     return redirect('cadastrar_paciente')
-
+@login_required  
 def editar_paciente(request, id):
     paciente = get_object_or_404(Paciente, id = id)
     return render(request, 'paciente/editar_paciente.html', {'paciente':paciente})
-
+@login_required  
 def update(request, id):
     nome            = request.POST.get('nome')
     email           = request.POST.get('email')
@@ -65,12 +70,12 @@ def update(request, id):
     telefone        = request.POST.get('telefone')        
     endereco        = request.POST.get('endereco') 
     paciente = Paciente.objects.get(id=id)
-    paciente.nome = nome,
-    paciente.data_nascimento = data_nascimento,
-    cpf = cpf,
-    email = email,
-    telefone = telefone,
-    endereco = endereco,
+    paciente.nome = nome
+    paciente.data_nascimento = data_nascimento
+    paciente.cpf = cpf
+    paciente.email = email
+    paciente.telefone = telefone
+    paciente.endereco = endereco
     paciente.save()
     messages.add_message(request, constants.SUCCESS, 'Paciente editado Com sucesso!!')
     return redirect('cadastrar_paciente')
