@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
    
 {% endblock %}
-<title>{% block 'title' %}SYSMED | Marca consulta{% endblock %}</title>
+<title>{% block 'title' %}SYSMED | Cadastrar medico{% endblock %}</title>
 {% block 'dashboard'%}
 <div class="container container-cadastro">
     {% if messages %}
@@ -73,7 +73,8 @@
          </div>
 
             <div class="botao">
-                <input type="submit" class="btn btn-success">
+                <input type="submit" class="btn btn-success" value="Salvar">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Add Nova especialidade</button>
             </div>
     </form>
 </div>
@@ -103,8 +104,8 @@
                 <td>{{medicos.crm}}</td>
                 <td>{{medicos.tel}}</td>
                 <td>
-                    <a href="" class="btn btn-info">Editar</a>
-                    <a href="" class="btn btn-danger"
+                    <a href="{% url 'editar_medico' medicos.id %}" class="btn btn-info">Editar</a>
+                    <a href="{% url 'deletar_medico' medicos.id %}" class="btn btn-danger"
                     onclick="return confirm('Deseja mesmo excluir o medico {{medicos.nome}}');">Excluir</a>
                 </td>
             </tr>
@@ -115,3 +116,8 @@
      {%include 'modulos/_paginacao_nav.html'%}
 </div>
 {% endblock 'dashboard'%}
+{% block modal %}
+ {% include 'modulos/_modal_especialidade.html'%}
+ 
+ 
+    {% endblock modal %}

@@ -17,8 +17,7 @@ from django.db.models import Q
 
 @has_permission_decorator('cadastrar_recepcionista')
 def cadastro_usuario(request):
-    
-    
+        
     if request.method == 'GET':
         cargo = Cargo.objects.all()
         users = Users.objects.all()

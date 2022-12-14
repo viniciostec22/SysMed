@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+   
+{% endblock %}
+<title>{% block 'title' %}SYSMED | Marca consulta{% endblock %}</title>
+{% block 'dashboard'%}
+<div class="container container-cadastro">
+    {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <h1 class="display-4">Editar Medico | {{medico.nome}} </h1>
+    <hr class="bg-hr">
+    <form class="" action="{% url 'update_medico' medico.id%}" method="POST">{% csrf_token %}
+        <div class="row">
+            <div class="col-md">
+                <label class="mr-sm-2">Nome</label>
+                <input type="text" placeholder="Digite nome " name="nome" class="form-control" value="{{medico.nome}}">
+            </div>
+            <div class="col-md">
+                <label class="mr-sm-2">Especialidade</label>
+                <select class="browser-default custom-select" name="especialidade">
+                    <option selected>Selecione a especialidade</option>
+                    {% if especialidades %}
+                    {% for especialidade in especialidades %}
+                           <option value="{{especialidade.id}}">{{especialidade.nome}}</option>
+                    {% endfor %} 
+                    {% endif %}                     
+                  </select>
+            </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md">
+                <label class="mr-sm-2">CRM</label>
+                <input type="text" placeholder="" name="crm" class="form-control" value="{{medico.crm}}">
+                
+            </div>
+            <div class="col-md">
+                <label  class="mr-sm-2">CPF</label>
+                <input type="text" placeholder="" name="cpf" class="form-control" alt="" value="{{medico.cpf}}">
+            </div>
+        </div>
+        <div class="row">
+           <div class="col-md">
+            <label  class="mr-sm-2">Data de Nascimento</label>
+            <input type="date" placeholder="" name="data_nascimento" class="form-control" value="{{medico.data_nascimento}}">
+           
+           </div>
+            <div class="col-md">
+                <label  class="mr-sm-2">Telefone</label>
+                <input type="text" placeholder="" name="telefone" class="form-control" alt="endereço" value="{{medico.tel}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md">
+                <label for="pwd">Endereço</label>
+                <input type="text" placeholder="" name="endereco" class="form-control" alt="endereço" value="{{medico.endereco}}">
+             
+            </div>
+             
+         </div>
+
+            <div class="botao">
+                <input type="submit" class="btn btn-success" value="Salvar">
+                <a href="{% url 'cadastra_medico' %}" class="btn btn-secondary">Voltar</a>
+            </div>
+            </div>
+    </form>
+</div>
+
+</div>
+{% endblock 'dashboard'%}
