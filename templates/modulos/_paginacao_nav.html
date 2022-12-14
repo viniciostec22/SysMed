@@ -26,4 +26,20 @@
         </ul>
     </nav>
 
+
+
+{% elif  users %}
+
+    <nav aria-label="Navegação de página exemplo">
+        <ul class="pagination">
+            {%for pagina in  users.paginator.page_range %}
+            {% if  users.number == pagina %}
+            <li class="page-item active"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
+        {%else%}
+            <li class="page-item"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
+        {% endif %}
+            {%endfor%}
+        </ul>
+    </nav>
+
 {% endif %}

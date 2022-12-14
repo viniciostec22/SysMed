@@ -11,6 +11,9 @@ from django.contrib.messages import constants
 from django.contrib import messages
 from .models import Cargo
 from django.core.validators import validate_email
+from django.core.paginator import Paginator
+from django.db.models import Q
+
 
 @has_permission_decorator('cadastrar_recepcionista')
 def cadastro_usuario(request):
@@ -55,7 +58,6 @@ def cadastro_usuario(request):
         messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!') 
         return redirect('cadastrar_usuario')
         
-
 def login(request):
     
     if request.method == "POST":
@@ -87,11 +89,13 @@ def exluir_usuario(request, id):
     messages.add_message(request, constants.SUCCESS, f'Usuario {users.first_name.upper()} exluido com sucesso')
     return redirect(reverse('cadastrar_usuario'))
 
+@login_required
 def editar_usuario(request, id):
     user = Users.objects.filter(id=id)
     if request.method == 'GET':
           return render(request, 'editar_usuario.html', {'user': user})
 
+@login_required
 def add_cargo(request):
     if request.method == "GET":
         return render(request, 'cadastro_usuario.html')
@@ -107,3 +111,17 @@ def add_cargo(request):
         cargo.save()
         messages.add_message(request, constants.SUCCESS, 'Cargo criado Com sucesso!!')
         return redirect('cadastrar_usuario')
+@login_required
+def listar_usuarios(request):
+    if request.GET.get('termo'):
+            termo = request.GET.get('termo')
+            print(termo)
+            users = Users.objects.filter(Q(username__icontains=termo)|Q(email__icontains=termo)|Q(first_name__icontains=termo))
+            return render(request, 'cadastro_usuario.html', {'users': users})
+    else:
+            users = Users.objects.order_by('-first_name')
+            users = Users.objects.all()
+            paginator = Paginator(users, 5)  
+            page = request.GET.get('page')
+            users = paginator.get_page(page)
+            return render(request, 'cadastro_usuario.html', {'users': users})

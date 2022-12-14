@@ -10,6 +10,7 @@ urlpatterns = [
     path('plataforma/', views.plataforma, name="plataforma"),
     path('excluir_usuario/<str:id>/', views.exluir_usuario, name="excluir_usuario"),
     path('editar_usuario/<str:id>/', views.editar_usuario, name="editar_usuario"),
-    path('add_cargo/', views.add_cargo, name="add_cargo")
+    path('add_cargo/', views.add_cargo, name="add_cargo"),
+    path('listar_usuarios/', views.listar_usuarios, name='listar_usuarios')
   
 ]
