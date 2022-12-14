@@ -51,7 +51,7 @@ def listar_consultas(request):
                                                         Q(data__icontains=termo))
       else:
               consultas = MarcarConsulta.objects.order_by('-id', '-paciente')
-      paginator = Paginator(consultas, 3)  
+      paginator = Paginator(consultas, 10)  
       page = request.GET.get('page')
       consultas = paginator.get_page(page)
       return render(request, 'consulta/consultas.html', {'consultas':consultas})

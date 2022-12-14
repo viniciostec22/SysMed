@@ -1,9 +1,4 @@
-import email
-from symbol import term
-from tokenize import Ignore
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
-
-import paciente
 from .forms import PacienteModelForm
 from .models import Paciente, Convenio
 from django.contrib.messages import constants
@@ -11,14 +6,29 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.core.paginator import Paginator
 
+
+def lista_pacientes(request):
+    if request.GET.get('termo'):
+            termo = request.GET.get('termo')
+            pacientes = Paciente.objects.filter(Q(nome__icontains=termo)|Q(email__icontains=termo)|Q(cpf__icontains=termo)|Q(telefone__icontains=termo))
+            return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
+    else:
+            pacientes = Paciente.objects.order_by('-nome')
+            pacientes = Paciente.objects.all()
+            paginator = Paginator(pacientes, 5)  
+            page = request.GET.get('page')
+            pacientes = paginator.get_page(page)
+            return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
+            
+    
 @login_required #type:ignore
 def cadastrar_paciente(request):
     pacientes = Paciente.objects.all()
-   
     if request.method == 'GET':
         return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
-    
+ 
     elif request.method == 'POST':
         nome            = request.POST.get('nome')
         email           = request.POST.get('email')
@@ -69,7 +79,9 @@ def update(request, id):
     cpf             = request.POST.get('cpf')
     telefone        = request.POST.get('telefone')        
     endereco        = request.POST.get('endereco') 
+    
     paciente = Paciente.objects.get(id=id)
+    
     paciente.nome = nome
     paciente.data_nascimento = data_nascimento
     paciente.cpf = cpf

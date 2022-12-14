@@ -34,7 +34,7 @@
                 <input type="email" placeholder="Digite o Email" name="email" class="form-control" value="{{request.POST.email}}">
             </div>
         </div>
-    </form>
+    
         <div class="row">
             <div class="col-md">
                 <label class="mr-sm-2">Data de Nascimento</label>
@@ -68,7 +68,7 @@
 
     <div class="table-responsive container">
         <hr class="bg-hr">
-            <form class="form-inline my-2 my-lg-0 filtrar" action="{% url 'cadastrar_paciente' %}">{% csrf_token %}
+            <form class="form-inline my-2 my-lg-0 filtrar" action="{% url 'listar_pacientes' %}">{% csrf_token %}
                 <input class="form-control mr-sm-2" type="" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
             </form>
@@ -101,5 +101,7 @@
              
             </tbody>
           </table>
+            <!-- Paginacao -->
+     {%include 'modulos/_paginacao_nav.html'%}
     </div>
     {% endblock 'dashboard'%}

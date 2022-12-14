@@ -3,7 +3,7 @@
     <nav aria-label="Navegação de página exemplo">
         <ul class="pagination">
             {%for pagina in consultas.paginator.page_range %}
-            {% if produtos.number == pagina %}
+            {% if consultas.number == pagina %}
                 <li class="page-item active"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
             {%else%}
                 <li class="page-item"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
@@ -12,12 +12,12 @@
         </ul>
     </nav>
 
-{% elif categorias %}
+{% elif pacientes %}
 
     <nav aria-label="Navegação de página exemplo">
         <ul class="pagination">
-            {%for pagina in categorias.paginator.page_range %}
-            {% if categorias.number == pagina %}
+            {%for pagina in pacientes.paginator.page_range %}
+            {% if pacientes.number == pagina %}
             <li class="page-item active"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>
         {%else%}
             <li class="page-item"><a class="page-link" href="?page={{pagina}}&termo={{request.GET.termo}}">{{pagina}}</a></li>

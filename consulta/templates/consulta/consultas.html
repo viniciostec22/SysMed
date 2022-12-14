@@ -27,6 +27,8 @@
         {% endfor %}
     {% endif %}
     <br>
+    <h1 class="display-4">Consultas Agendadas </b></h1>
+    <hr class="bg-hr">
         <form class="form-inline my-2 my-lg-0" action="{% url 'listar_consultas' %}">{% csrf_token %}
             <input class="form-control mr-sm-2" type="" placeholder="Pesquisar" aria-label="Pesquisar" name="termo">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
