@@ -21,6 +21,9 @@
             </section>
         {% endfor %}
     {% endif %}
+    <br>
+    <h1 class="display-4">Cadastro de Funcionarios </h1>
+    <hr class="bg-hr">
         <form class="" action="{% url 'cadastrar_usuario' %}" method="POST">{% csrf_token %}
             <div class="row">
                 <div class="col-md">
