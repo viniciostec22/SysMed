@@ -17,9 +17,23 @@ from django.db.models import Q
 
 @has_permission_decorator('cadastrar_recepcionista')
 def cadastro_usuario(request):
-    cargo = Cargo.objects.all()
+    
+    
     if request.method == 'GET':
+        cargo = Cargo.objects.all()
         users = Users.objects.all()
+        if request.GET.get('termo'):
+            termo = request.GET.get('termo')
+            print(termo)
+            users = Users.objects.filter(Q(username__icontains=termo)|Q(email__icontains=termo)|Q(first_name__icontains=termo))
+            return render(request, 'cadastro_usuario.html', {'users': users})
+        else:
+                users = Users.objects.order_by('-first_name')
+        users = Users.objects.all()
+        paginator = Paginator(users, 5)  
+        page = request.GET.get('page')
+        users = paginator.get_page(page)
+        #return render(request, 'cadastro_usuario.html', {'users': users})
         return render(request, 'cadastro_usuario.html', {'users': users, 'cargo':cargo})
     elif request.method == 'POST':
         usuario = request.POST.get('usuario')
@@ -111,17 +125,4 @@ def add_cargo(request):
         cargo.save()
         messages.add_message(request, constants.SUCCESS, 'Cargo criado Com sucesso!!')
         return redirect('cadastrar_usuario')
-@login_required
-def listar_usuarios(request):
-    if request.GET.get('termo'):
-            termo = request.GET.get('termo')
-            print(termo)
-            users = Users.objects.filter(Q(username__icontains=termo)|Q(email__icontains=termo)|Q(first_name__icontains=termo))
-            return render(request, 'cadastro_usuario.html', {'users': users})
-    else:
-            users = Users.objects.order_by('-first_name')
-            users = Users.objects.all()
-            paginator = Paginator(users, 5)  
-            page = request.GET.get('page')
-            users = paginator.get_page(page)
-            return render(request, 'cadastro_usuario.html', {'users': users})
+

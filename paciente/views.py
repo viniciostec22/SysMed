@@ -9,25 +9,23 @@ from django.db.models import Q
 
 
 
-def lista_pacientes(request):
-    if request.GET.get('termo'):
-            termo = request.GET.get('termo')
-            pacientes = Paciente.objects.filter(Q(nome__icontains=termo)|Q(email__icontains=termo)|Q(cpf__icontains=termo)|Q(telefone__icontains=termo))
-            return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
-    else:
-            pacientes = Paciente.objects.order_by('-nome')
-            pacientes = Paciente.objects.all()
-            paginator = Paginator(pacientes, 5)  
-            page = request.GET.get('page')
-            pacientes = paginator.get_page(page)
-            return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
-            
     
 @login_required #type:ignore
 def cadastrar_paciente(request):
     pacientes = Paciente.objects.all()
     if request.method == 'GET':
+        if request.GET.get('termo'):
+            termo = request.GET.get('termo')
+            pacientes = Paciente.objects.filter(Q(nome__icontains=termo)|Q(email__icontains=termo)|Q(cpf__icontains=termo)|Q(telefone__icontains=termo))
+            return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
+        else:
+                pacientes = Paciente.objects.order_by('-nome')
+        pacientes = Paciente.objects.all()
+        paginator = Paginator(pacientes, 5)  
+        page = request.GET.get('page')
+        pacientes = paginator.get_page(page)
         return render(request, 'paciente/cadastro_paciente.html', {'pacientes':pacientes})
+       
  
     elif request.method == 'POST':
         nome            = request.POST.get('nome')
