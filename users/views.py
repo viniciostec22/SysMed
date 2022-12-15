@@ -70,10 +70,14 @@ def cadastro_usuario(request):
         user = Users.objects.create_user(username=usuario, email=email, first_name=nome, last_name=sobrenome, password=senha, cargo_id=cargo, data_nascimento=data_nascimento, cpf=cpf)  # type: ignore
         messages.add_message(request, constants.SUCCESS, 'Usuario cadastrado com sucesso!') 
         return redirect('cadastrar_usuario')
-        
+       
 def login(request):
-    
-    if request.method == "POST":
+    if request.method == "GET":
+       
+        return render(request, 'login.html')
+        
+        
+    elif request.method == "POST":
         login = request.POST.get('email')
         senha = request.POST.get('senha')
         
@@ -86,7 +90,7 @@ def login(request):
         auth.login(request, user)
         messages.add_message(request, constants.SUCCESS, 'Login efetuado com sucesso')
         return render(request,'plataforma.html',{'user':user})
-    return redirect(reverse('plataforma'))
+      
 @login_required
 def plataforma(request):
     return render(request,'plataforma.html')  
