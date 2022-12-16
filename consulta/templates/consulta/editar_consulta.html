@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block 'head' %}
+    <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
+    <link rel="stylesheet" href="{% static 'consulta/css/consulta.css' %}">
+    <script src="{% static 'consulta/css/conulta.js' %}"></script>
+   
+{% endblock %}
+<title>{% block 'title' %}SYSMED | Editar consulta{% endblock %}</title>
+{% block 'dashboard'%}
+<div class="container container-cadastro">
+    {% if messages %}
+        {% for message in messages %}
+        <br>
+            <section class="alert {{message.tags}}">
+                {{message}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </section>
+        {% endfor %}
+    {% endif %}
+    <br>
+    <h1 class="display-4"> {{consulta.paciente}}</h1>
+    <hr class="bg-hr">
+    <form class="" action="{% url 'cadastrar_consulta' %}" method="POST">{% csrf_token %}
+        <div class="row">
+            <div class="col-md">
+                <label class="mr-sm-2">Paciente</label>
+                {% comment %} <input type="text" value="{{pacienteunico}}" class="form-control" readonly>                   {% endcomment %}
+                <input type="text" list="medicos" id="medico" name="paciente" class="form-control" autocomplete="off" value="{{consulta.paciente}}">
+                  
+                  {% comment %} <button type="search" value="{{pacientes.id}}" >Pesquisar</button> {% endcomment %}
+                 {% comment %} <input type="text"  class="form-control"> {% endcomment %}
+                 
+                  {% comment %}<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+                    +
+                  </button> {% endcomment %}
+            </div>
+            
+            <div class="col-md">
+            <label  class="mr-sm-2">Medico responsavel</label>
+            <input type="text" list="medicos" id="medico" name="medico" class="form-control" autocomplete="off" value="{{consulta.medico}}">
+            
+           
+           </div>
+        </div>
+        <div class="row"> 
+            <div class="col-md">
+                <label class="mr-sm-2">Data e Hora da Consulta</label>
+                <input class="form-control input-tarefa" type="datetime-local" name="hora" value="{{consulta.hora}}" >
+                </select>
+                
+            </div>
+            <div class="col-md">
+                <label for="pwd">Valor da Consulta (R$)</label>
+                <input type="text" placeholder="" name="valor" class="form-control" alt="endereço" value="{{consulta.valor}}">
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-md">
+             <label  class="mr-sm-2">Descrição</label>
+            <textarea name="descricao" id="" cols="30" rows="5" class="form-control" >{{consulta.descricao}}</textarea>
+            </div>
+             
+         </div>
+
+            <div class="botao">
+                <input type="submit" class="btn btn-success" value="Salvar">
+            </div>
+    </form>
+</div>
+
+{% endblock 'dashboard'%}
+

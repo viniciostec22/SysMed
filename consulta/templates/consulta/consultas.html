@@ -40,8 +40,8 @@
               <tr>
                 <th scope="col">Paciente</th>
                 <th scope="col">Medico</th>
-                <th scope="col">Data</th>
-                <th scope="col">Horario</th>
+               
+                <th scope="col">Data e Hora</th>
                 <th scope="col">Ações</th>
               </tr>
              
@@ -51,11 +51,12 @@
                 {% for consulta in consultas %}
                 <th scope="row">{{consulta.paciente}}</th>
                 <td>{{consulta.medico}}</td>
-                <td>{{consulta.data}}</td>
-                <td>{{consulta.get_horario_display}}</td>
+                
+                <td>{{consulta.horario}}</td>
                 <td> 
                     <a href="{% url 'editar_consulta' consulta.id %}" class="btn btn-success">Reagendar </a>
-                    <a href="{% url 'excluir_consulta' consulta.id %} " class="btn btn-danger">Excluir</a>
+                    <a href="{% url 'excluir_consulta' consulta.id %} "
+                    onclick="return confirm('Deseja mesmo excluir a consulta {{user.first_name}}');" class="btn btn-danger">Excluir</a>
                 
                 </td>
               </tr>
