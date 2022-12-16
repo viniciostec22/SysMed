@@ -1,6 +1,3 @@
-from unicodedata import name
-from django.contrib.auth.models import User
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from rolepermissions.decorators import has_permission_decorator
 from .models import Users, Cargo
@@ -9,7 +6,6 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.messages import constants
 from django.contrib import messages
-from .models import Cargo
 from django.core.validators import validate_email
 from django.core.paginator import Paginator
 from django.db.models import Q
