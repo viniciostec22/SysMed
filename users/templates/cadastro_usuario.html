@@ -4,7 +4,7 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
-    <script src="{% static 'cadastro/js/cpf.js' %}"></script>
+    <script src="{% static 'general/js/mascara.js' %}"></script>
    
 {% endblock %}
 <title>{% block 'title' %}SYSMED | Cadastro{% endblock %}</title>
@@ -22,7 +22,7 @@
         {% endfor %}
     {% endif %}
     <br>
-    <h1 class="display-4">Cadastro de Funcionarios </h1>
+    <h1 class="display-4">Cadastro de Funcionários </h1>
     <hr class="bg-hr">
         <form class="" action="{% url 'cadastrar_usuario' %}" method="POST">{% csrf_token %}
             <div class="row">

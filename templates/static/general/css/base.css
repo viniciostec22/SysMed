@@ -9,6 +9,10 @@
  
   background: var(--dark-color);
   }
+
+label{
+  font-size: 32;
+}
 .sidebar{
   position: fixed;
   left: 0;

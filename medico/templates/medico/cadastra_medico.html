@@ -4,7 +4,9 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
-   
+    <script src="{% static 'general/js/mascara.js' %}"></script>
+    
+    
 {% endblock %}
 <title>{% block 'title' %}SYSMED | Cadastrar medico{% endblock %}</title>
 {% block 'dashboard'%}
@@ -21,7 +23,7 @@
         {% endfor %}
     {% endif %}
     <br>
-    <h1 class="display-4">Cadastrar Medico </h1>
+    <h1 class="display-4">Cadastrar Médico </h1>
     <hr class="bg-hr">
     <form class="" action="{% url 'cadastra_medico' %}" method="POST">{% csrf_token %}
         <div class="row">
@@ -49,7 +51,7 @@
             </div>
             <div class="col-md">
                 <label  class="mr-sm-2">CPF</label>
-                <input type="text" placeholder="" name="cpf" class="form-control" alt="">
+                <input oninput="mascara(this)" type="text" class="form-control" name="cpf" placeholder="CPF">
             </div>
         </div>
         <div class="row">
@@ -60,7 +62,7 @@
            </div>
             <div class="col-md">
                 <label  class="mr-sm-2">Telefone</label>
-                <input type="text" placeholder="" name="telefone" class="form-control" alt="endereço">
+                <input type="text" name="telefone" id="telefone" placeholder="Digite um número de telefone" maxlength="15" class="form-control" />
             </div>
         </div>
         <div class="row">

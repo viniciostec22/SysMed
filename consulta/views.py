@@ -4,12 +4,12 @@ from paciente.models import Paciente
 from medico.models import Medico
 from django.db.models import Q
 from .models import MarcarConsulta
-from .forms import MarcaConsultaModelForm
 from django.contrib.messages import constants
 from django.contrib import messages
 from django.urls import reverse
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 @login_required
 def cadastrar_consulta(request):
@@ -57,11 +57,46 @@ def cadastrar_consulta(request):
                 return render(request, 'consulta/cadastrar_consulta.html', {'pacientes':pacientes, 'medicos':medicos})
 @login_required
 def editar_consulta(request, id):
+        
         pacientes = Paciente.objects.filter(id=id)
         consulta = get_object_or_404(MarcarConsulta, id=id)
         return render(request, 'consulta/editar_consulta.html', {'pacientes':pacientes,'consulta':consulta})
+@login_required                
+def update_consulta(request, id):
+        paciente = request.POST.get('paciente')
+        if paciente == '':
+                messages.add_message(request, constants.ERROR, 'Campo Nome do paciente é obrigatorio!!')
+                return redirect(f'/consulta/editar_consulta/{id}')
+        paciente = Paciente.objects.get(nome=paciente)
+    
+        medico = request.POST.get('medico')
+        if medico== '':
+                messages.add_message(request, constants.ERROR, 'Campo Medico Obrigatorio!!')
+                return redirect(reverse('editar_consulta'))
+        medico = Medico.objects.get(nome = medico)
+        
                 
-
+        valor = request.POST.get('valor')
+        horario = request.POST.get('hora')
+        descricao = request.POST.get('descricao')
+        
+        consulta = MarcarConsulta.objects.get(id=id)
+        
+        consulta.paciente_id = paciente
+        consulta.medico_id = medico
+        consulta.valor = valor
+        consulta.horario = horario
+        consulta.descricao = descricao
+        
+        if not  valor or not horario or not descricao: 
+                messages.add_message(request, constants.ERROR, 'Não pode deixar campos em Branco!!')
+                return redirect(f'/consulta/editar_consulta/{id}')
+        if MarcarConsulta.objects.filter(medico=medico, horario=horario):
+                messages.add_message(request, constants.ERROR, 'Horario não esta disponivel para o medico!!')
+                return redirect(f'/consulta/editar_consulta/{id}')
+        consulta.save()
+        messages.add_message(request, constants.SUCCESS, 'Consulta auterada com sucesso!!')        
+        return redirect(reverse('listar_consultas'))
 @login_required
 def listar_consultas(request):
 

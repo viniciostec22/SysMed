@@ -4,7 +4,9 @@
 
 {% block 'head' %}
     <link rel="stylesheet" href="{% static 'cadastro/css/cadastro_usuarios.css' %}">
-   
+    <script src="{% static 'general/js/mascara.js' %}"></script>
+    
+
 {% endblock %}
 <title>{% block 'title' %}SYSMED | Cadastro Pacientes{% endblock %}</title>
 {% block 'dashboard'%}
@@ -43,18 +45,18 @@
             </div>
             <div class="col-md">
                 <label  class="mr-sm-2">CPF</label>
-                <input type="text" placeholder="CPF" name="cpf" class="form-control" alt="Digite seu cpf">
+                <input oninput="mascara(this)" type="text" class="form-control" name="cpf" placeholder="CPF">
             </div>
         </div>
         <div class="row">
            <div class="col-md">
             <label  class="mr-sm-2">Telefone</label>
-            <input type="text" placeholder="Digite Telefone" name="telefone" class="form-control">
+            <input type="text" name="telefone" id="telefone" placeholder="Digite um número de telefone" maxlength="15" class="form-control" />
            
            </div>
             <div class="col-md">
                 <label for="pwd">Endereço</label>
-                <input type="text" placeholder="Digite endereco" name="endereco" class="form-control" alt="endereço">
+                <input oninput="tel(this)" type="text" placeholder="Digite endereco" name="endereco" class="form-control" alt="endereço">
             </div>
         </div>
 
@@ -105,4 +107,5 @@
             <!-- Paginacao -->
      {%include 'modulos/_paginacao_nav.html'%}
     </div>
+    
     {% endblock 'dashboard'%}

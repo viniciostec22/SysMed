@@ -26,8 +26,8 @@
     <table class="table table-striped table-dark" >
         <thead >
           <tr>
-            <th scope="col">Medico</th>
-            <th scope="col">Horario</th>
+            <th scope="col">Médico</th>
+            <th scope="col">Horário</th>
             
           </tr>
         </thead>
@@ -35,7 +35,7 @@
           {% for horarios in horario %}
           <tr>
             <th scope="row">{{horarios.medico}}</th>
-            <td>{{horarios.get_horario_display}}</td>
+            <td>{{horarios.horario}}</td>
                   
           </tr>
           {% endfor %}
